@@ -8,7 +8,7 @@
 
 #define DELIM ' '
 
-int solution(std::vector<int> l1, std::vector<int> l2)
+int part_1(std::vector<int> l1, std::vector<int> l2)
 {
     std::sort(std::begin(l1), std::end(l1));
     std::sort(std::begin(l2), std::end(l2));
@@ -18,6 +18,25 @@ int solution(std::vector<int> l1, std::vector<int> l2)
     {
         // std::cout << l1[i] << "-" << l2[i] << " ";
         sum += std::abs(l1[i] - l2[i]);
+    }
+
+    return sum;
+}
+
+int part_2(std::vector<int> l1, std::vector<int> l2)
+{
+    unsigned int sum = 0;
+    for(int i = 0; i < l1.size(); ++i)
+    {
+        int occurances = 0;
+        for(int j = 0; j < l2.size(); ++j)
+        {
+            if(l2[j] == l1[i]) {
+                ++occurances;
+            }
+        }
+
+        sum += l1[i] * occurances;
     }
 
     return sum;
@@ -44,5 +63,6 @@ int main()
 {
 
     auto [l1, l2] = readInput();
-    std::cout << solution(l1, l2) << std::endl;
+    std::cout << "Part 1: " << part_1(l1, l2) << std::endl;
+    std::cout << "Part 2: " << part_2(l1, l2) << std::endl;
 }
